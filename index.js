@@ -81,7 +81,7 @@ function parseUnread() {
     if (err) {
       self.emit('error', err);
     } else if (results.length > 0) {
-      async.each(results, function( result, callback) {
+      async.eachSeries(results, function( result, callback) {
         var f = self.imap.fetch(result, {
           bodies: '',
           markSeen: self.markSeen
@@ -126,6 +126,7 @@ function parseUnread() {
         if( err ) {
           self.emit('error', err);
         }
+        console.log('DONE PROCESSING QUEUE')
       });
     }
   });
